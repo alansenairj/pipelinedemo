@@ -25,7 +25,7 @@ pipeline {
         }
         stage('umane') {
             steps {
-                echo 'uname...'"
+                echo "uname..."
                 sh "uname -a >> umane.txt"
             }
         }
