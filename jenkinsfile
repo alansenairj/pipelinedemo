@@ -22,6 +22,11 @@ pipeline {
 
             }
         }
+        stage('smoke teste') {
+            steps {
+                echo 'fumaça...'
+            }
+        }
     }
     
     post {
