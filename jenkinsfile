@@ -1,7 +1,6 @@
 pipeline {
     agent any 
     
-
     
     stages {
 
@@ -40,9 +39,9 @@ pipeline {
     }
     
     post {
-        always { echo "Eu sempre vou ser executado!"}
-        success { echo "comppilação finalizada com sucesso!" >> assessment.txt}
-        failure { echo "Somentei serei executado quando finalizar com erro!"}
+        always { sh echo "Eu sempre vou ser executado!"}
+        success { sh echo "comppilação finalizada com sucesso!" >> assessment.txt}
+        failure { sh echo "Somentei serei executado quando finalizar com erro!"}
     }
     
 }
