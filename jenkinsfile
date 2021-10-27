@@ -4,34 +4,44 @@ pipeline {
 
     
     stages {
-        stage('Build') {
+
+        stage('arquivo criado') {
             steps {
-                echo 'Building...'
-                sh 'echo $NOME $SOBRENOME'
+                sh touch > assessment.txt
+            }
+        }
+
+        stage('distro') {
+            steps {
+                sh echo 'distro...'
+                sh cat /etc/*-release >> assessment.txt
             }
             
         }
-        stage('Test') {
+        stage('umane') {
             steps {
-                echo 'Testando...'
+                sh echo 'uname...'
+                sh uname -a >> assessment.txt
             }
         }
-        stage('Deploy') {
+        stage('users') {
             steps {
-                echo 'Deploying...'
+                sh echo 'users...'
+                cat /etc/passwd | cut -d: -f1 >> assessment.txt
 
             }
         }
-        stage('smoke teste') {
+        stage('pacotes') {
             steps {
-                echo 'fumaça...'
+                echo 'pacotes...'
+                sh dpkg -l >> assessment.txt
             }
         }
     }
     
     post {
         always { echo "Eu sempre vou ser executado!"}
-        success { echo "Somente serei executado quando finalizar com sucesso!"}
+        success { echo "comppilação finalizada com sucesso!" >> assessment.txt}
         failure { echo "Somentei serei executado quando finalizar com erro!"}
     }
     
