@@ -4,42 +4,56 @@ pipeline {
     
     stages {
 
+        stage(clean) {
+            steps {
+                sh 'rm -rf ${workspace}/build'
+            }
+        }
+
         stage('arquivo criado') {
             steps {
-
+                echo "criando arquivo"
                 sh "touch assessment.txt"
             }
         }
 
         stage('distro') {
             steps {
-                sh "cat /etc/*-release >> assessment.txt"
+                sh "cat /etc/*-release >> distro.txt"
             }
             
         }
         stage('umane') {
             steps {
-                sh "echo 'uname...'"
-                sh "uname -a >> assessment.txt"
+                echo 'uname...'"
+                sh "uname -a >> umane.txt"
             }
         }
         stage('users') {
             steps {
-                sh "echo 'users...'"
-                sh "cat /etc/passwd | cut -d: -f1 >> assessment.txt"
+                echo 'users...'
+                sh "cat /etc/passwd | cut -d: -f1 >> users.txt"
 
             }
         }
         stage('pacotes') {
             steps {
                 sh "echo 'pacotes...'"
-                sh "dpkg -l >> assessment.txt"
+                sh "dpkg -l >> packages.txt"
             }
         }
     }
     
     post {
-        always { echo "Eu sempre vou ser executado!"}
+        always { echo "Eu sempre vou ser executado!"
+          sh "> assessment.txt"
+          sh "cat /tmp/distro.txt >> assessment.txt"
+          sh "cat /tmp/umane.txt >> assessment.txt"
+          sh "cat /tmp/users.txt >> assessment.txt"
+          sh "cat /tmp/packages.txt >> assessment.txt"
+
+        
+        }
         success {  echo "comppilação finalizada com sucesso!" }
         failure {  echo "Somentei serei executado quando finalizar com erro!"}
     }
