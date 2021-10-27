@@ -41,8 +41,8 @@ pipeline {
     
     post {
         always { echo "Eu sempre vou ser executado!"}
-        success { sh echo "comppilação finalizada com sucesso!" }
-        failure { sh echo "Somentei serei executado quando finalizar com erro!"}
+        success {  echo "comppilação finalizada com sucesso!" }
+        failure {  echo "Somentei serei executado quando finalizar com erro!"}
     }
     
 }
