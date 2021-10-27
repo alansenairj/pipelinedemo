@@ -19,27 +19,27 @@ pipeline {
 
         stage('distro') {
             steps {
-                sh "cat /etc/*-release >> distro.txt"
+                sh "cat /etc/*-release >> /tmp/distro.txt"
             }
             
         }
         stage('umane') {
             steps {
                 echo "uname..."
-                sh "uname -a >> umane.txt"
+                sh "uname -a >> /tmp/umane.txt"
             }
         }
         stage('users') {
             steps {
                 echo 'users...'
-                sh "cat /etc/passwd | cut -d: -f1 >> users.txt"
+                sh "cat /etc/passwd | cut -d: -f1 >> /tmp/users.txt"
 
             }
         }
         stage('pacotes') {
             steps {
                 sh "echo 'pacotes...'"
-                sh "dpkg -l >> packages.txt"
+                sh "dpkg -l >> /tmp/packages.txt"
             }
         }
     }
