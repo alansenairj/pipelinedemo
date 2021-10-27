@@ -54,7 +54,7 @@ pipeline {
 
         
         }
-        success {  echo "comppilação finalizada com sucesso!" }
+        success {  echo "compilação finalizada com sucesso!" }
         failure {  echo "Somentei serei executado quando finalizar com erro!"}
     }
     
